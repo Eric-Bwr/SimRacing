@@ -7,7 +7,7 @@ UDP_IP = "127.0.0.1"
 UDP_PORT = 30500
 
 data_types = {}
-with open('data_format.txt', 'r') as f:
+with open('data_format_fh5.txt', 'r') as f:
     lines = f.read().split('\n')
     for line in lines:
         data_types[line.split()[1]] = line.split()[0]
