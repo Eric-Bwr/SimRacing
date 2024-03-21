@@ -51,39 +51,30 @@ def get_data(data):
         passed_data = passed_data[jump:]
     return return_dict
 
-def list_arduino_ports():
-    arduino_ports = [
-        p.device
-        for p in serial.tools.list_ports.comports()
-    ]
-    return arduino_ports
-
-def select_arduino_port():
-    ports = list_arduino_ports()
-    if not ports:
-        print("No ports found!")
-        return None
-    print("Available ports:")
-    for i, port in enumerate(ports):
-        print(f"{i+1}. {port}")
+def get_arduino_port():
+    start_time = time.time()
     while True:
-        try:
-            choice = int(input("Enter the number corresponding to the Arduino port: "))
-            if choice < 1 or choice > len(ports):
-                print("Invalid choice. Please enter a valid number.")
-            else:
-                return ports[choice - 1]
-        except ValueError:
-            print("Invalid input. Please enter a number.")
+        arduino_ports = [
+            p.device
+            for p in serial.tools.list_ports.comports()
+            if "Arduino Micro" in p.description
+        ]
+
+        if arduino_ports:
+            print("Found Sim-Racing setup, waiting a bit for it to load", flush=True)
+            time.sleep(5)
+            return arduino_ports[0]
+            
+        print("No Sim-Racing setup found, waiting...")
+       
+        time.sleep(1)
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 sock.bind((UDP_IP, UDP_PORT))
 
-arduino_port = select_arduino_port()
-if not arduino_port:
-    exit()
+ser = serial.Serial(get_arduino_port(), 9600, write_timeout=0.1) 
 
-ser = serial.Serial(arduino_port, 9600, write_timeout=0.1) 
+print("Connected.", flush=True)
 
 def map_value(value, in_min, in_max, out_min, out_max):
     return (value - in_min) * (out_max - out_min) / (in_max - in_min) + out_min
@@ -109,7 +100,7 @@ try:
 
         if current_time - interval_start_time >= 0.1:
             average_speed /= count
-            mapped_speed = map_value(average_speed, 0.0, 200.0, 0.0, 100.0)
+            mapped_speed = map_value(average_speed, 0.0, 300.0, 0.0, 100.0)
             mapped_speed = clamp_value(mapped_speed, 0.0, 100.0)
             mapped_speed = int(mapped_speed)
             average_speed = int(average_speed)

@@ -1,8 +1,8 @@
 const int FAN_LEFT_PIN = 3;
 const int FAN_RIGHT_PIN = 6;
-const int FAN_LEFT_MIN = 10;
+const int FAN_LEFT_MIN = 20;
 const int FAN_LEFT_MAX = 255;
-const int FAN_RIGHT_MIN = 10;
+const int FAN_RIGHT_MIN = 20;
 const int FAN_RIGHT_MAX = 255;
 
 void setup() {
