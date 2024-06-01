@@ -1,0 +1,42 @@
+* {
+    row-gap: 0 !important;
+    margin-bottom: 0 !important;
+    margin-top: 0 !important;
+}
+
+#MainMenu,
+footer,
+header,
+.StyledThumbValue,
+button[title="View fullscreen"],
+button[title="View fullscreen"]:hover,
+div[data-testid="stStatusWidget"],
+div[data-testid="stDecoration"],
+div[data-testid="stToolbar"],
+div[data-testid="stTickBar"],
+label[data-testid="stWidgetLabel"] {
+    display: none;
+    visibility: hidden;
+    margin: 0;
+    padding: 0;
+    width: 0;
+    height: 0;
+    right: 0;
+}
+
+.block-container {
+    padding: 0 1px;
+    margin: 0;
+}
+
+[data-testid="stText"] > div, span, p {
+    font-size: 100px;
+}
+
+div[data-baseweb="progress-bar"] > div > div {
+    background-color: #4D4D4D;
+}
+
+div[data-baseweb="progress-bar"] > div > div > div {
+    background-color: white;
+}
