@@ -25,18 +25,46 @@ label[data-testid="stWidgetLabel"] {
 }
 
 .block-container {
-    padding: 0 1px;
+    padding: 0;
     margin: 0;
 }
 
-[data-testid="stText"] > div, span, p {
-    font-size: 100px;
+.progress-bar {
+    height: 100px;
+    text-align: center;
+    line-height: 30px;
+    color: white;
+    border-radius: 5px;
 }
 
-div[data-baseweb="progress-bar"] > div > div {
+.progress-container {
+    width: 100%;
     background-color: #4D4D4D;
+    border-radius: 5px;
+    padding: 3px;
+    margin: 20px 0;
+    position: fixed;
+    bottom: 0;
 }
 
-div[data-baseweb="progress-bar"] > div > div > div {
-    background-color: white;
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap');
+.gear-display {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 400px;
+    color: #FFFFFF;
+    text-align: center;
+    margin: 20px 0;
+    position: fixed;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@700&display=swap');
+.speed-display {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 200px;
+    color: #FFFFFF;
+    text-align: center;
+    transform: translate(0, -20%);
 }

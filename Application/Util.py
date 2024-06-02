@@ -1,5 +1,6 @@
 import streamlit as st
 
+KEY_CSS = "css"
 KEY_IS_RACE_ON = "raceOn"
 KEY_SPEED = "speed"
 KEY_GEAR = "gear"
@@ -11,6 +12,7 @@ KEY_ENGINE_RPM_PERC = "enginePerc"
 @st.cache_resource
 def getSharedData():
     return {
+        KEY_CSS: "",
         KEY_IS_RACE_ON: False,
         KEY_SPEED: 0.0,
         KEY_GEAR: "N",

@@ -9,6 +9,8 @@ from streamlit.runtime.scriptrunner import add_script_run_ctx
 def init():
     sharedData = getSharedData()
 
+    sharedData[KEY_CSS] = open(".streamlit/style.css", "r").read()
+
     updateArduinoThread = threading.Thread(target=runArduino, args=(sharedData,))
     updateArduinoThread.daemon = True
     add_script_run_ctx(updateArduinoThread)
@@ -22,49 +24,65 @@ def init():
     return sharedData
 
 
-def setBackgroundColor(color):
-    css = f"""
-    div[data-baseweb="progress-bar"] > div > div > div {{
-        background-color: {color};
-    }}
-    """
-    st.markdown(f"""<style>{css}</style>""", unsafe_allow_html=True)
-
-
-def calcBackgroundColor(rpm):
-    if rpm < 0.7:
-        return "#FFFFFF"
+def getRPMColor(rpm):
+    if rpm < 0.8:
+        return rgbToHex(0, 255, 0)
     else:
-        t = (rpm - 0.7) / 0.3
+        t = (rpm - 0.8) / 0.2
         r = lerp(0, 255, t)
         g = lerp(255, 0, t)
         b = 0
         return rgbToHex(r, g, b)
 
 
+def renderEngineRPM(rpm, element):
+    barHtml = f"""
+    <div class="progress-container">
+      <div class="progress-bar" id="progress-bar"/div>
+    </div>
+    <style>
+      .progress-bar {{
+        width: {rpm * 100.0}%;
+        background-color: {getRPMColor(rpm)};
+      }}
+    </style>
+    """
+    element.markdown(barHtml, unsafe_allow_html=True)
+
+
+def renderGear(gear, element):
+    gearHtml = f"""
+    <div class="gear-display">{gear}</div>
+    """
+    element.markdown(gearHtml, unsafe_allow_html=True)
+
+
+def renderSpeed(speed, element):
+    gearHtml = f"""
+    <div class="speed-display">{speed}</div>
+    """
+    element.markdown(gearHtml, unsafe_allow_html=True)
+
+
 def main():
     print("Init", flush=True)
     st.set_page_config(layout="wide")
     sharedData = init()
-
-    css = open(".streamlit/style.css", "r").read()
-    st.markdown(f"""<style>{css}</style>""", unsafe_allow_html=True)
+    st.markdown(f"""<style>{sharedData[KEY_CSS]}</style>""", unsafe_allow_html=True)
 
     speedDisplay = st.empty()
     gearDisplay = st.empty()
-    rpm = st.progress(value=0.0)
+    rpmDisplay = st.empty()
 
     while True:
         if sharedData[KEY_IS_RACE_ON]:
-            speedDisplay.text(f"""{format(sharedData[KEY_SPEED], ".0f")}kmh""")
-            gearDisplay.text(f"""{sharedData[KEY_GEAR]}""")
-            rpm.progress(sharedData[KEY_ENGINE_RPM_PERC])
-            setBackgroundColor(calcBackgroundColor(sharedData[KEY_ENGINE_RPM_PERC]))
+            renderSpeed(f"{int(sharedData[KEY_SPEED]):03d}", speedDisplay)
+            renderGear(sharedData[KEY_GEAR], gearDisplay)
+            renderEngineRPM(sharedData[KEY_ENGINE_RPM_PERC], rpmDisplay)
         else:
-            speedDisplay.text("---")
-            gearDisplay.text("---")
-            rpm.progress(0.0)
-            setBackgroundColor(calcBackgroundColor(0.0))
+            renderSpeed("-", speedDisplay)
+            renderGear("-", gearDisplay)
+            renderEngineRPM(0.0, rpmDisplay)
         time.sleep(0.01)
 
 
