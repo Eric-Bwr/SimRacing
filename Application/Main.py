@@ -83,7 +83,7 @@ def main():
             renderSpeed("-", speedDisplay)
             renderGear("-", gearDisplay)
             renderEngineRPM(0.0, rpmDisplay)
-        time.sleep(0.01)
+        time.sleep(0.02)
 
 
 if __name__ == "__main__":

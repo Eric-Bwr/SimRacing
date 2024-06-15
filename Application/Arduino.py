@@ -30,4 +30,4 @@ def getArduinoPort():
 
         print("No Sim-Racing setup found, waiting...")
 
-        time.sleep(1)
+        time.sleep(1.0)
