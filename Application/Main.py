@@ -63,28 +63,3 @@ def renderSpeed(speed, element):
     """
     element.markdown(gearHtml, unsafe_allow_html=True)
 
-
-def main():
-    print("Init", flush=True)
-    st.set_page_config(layout="wide")
-    sharedData = init()
-    st.markdown(f"""<style>{sharedData[KEY_CSS]}</style>""", unsafe_allow_html=True)
-
-    speedDisplay = st.empty()
-    gearDisplay = st.empty()
-    rpmDisplay = st.empty()
-
-    while True:
-        if sharedData[KEY_IS_RACE_ON]:
-            renderSpeed(f"{int(sharedData[KEY_SPEED]):03d}", speedDisplay)
-            renderGear(sharedData[KEY_GEAR], gearDisplay)
-            renderEngineRPM(sharedData[KEY_ENGINE_RPM_PERC], rpmDisplay)
-        else:
-            renderSpeed("-", speedDisplay)
-            renderGear("-", gearDisplay)
-            renderEngineRPM(0.0, rpmDisplay)
-        time.sleep(0.02)
-
-
-if __name__ == "__main__":
-    main()

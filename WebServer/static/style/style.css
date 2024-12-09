@@ -3,34 +3,24 @@ body {
     background-color: #2B2B2B;
 }
 
-.coordinates {
-    margin-top: 20px;
-    font-size: 18px;
-    color: white;
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@700&display=swap');
+#speed {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 200px;
+    color: #FFFFFF;
+    text-align: center;
+    transform: translate(0, -20%);
 }
 
-.coordinates p {
-    margin: 5px 0;
-}
-
-.file-actions-container {
-    display: flex;
-    justify-content: space-between;
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap');
+#gear {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 400px;
+    color: #FFFFFF;
+    text-align: center;
     margin: 20px 0;
-    width: 100%;
-    gap: 20px;
-}
-
-.custom-upload-button, .custom-download-button {
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.custom-upload-button:hover, .custom-download-button:hover {
-    background-color: #45a049;
+    position: fixed;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }

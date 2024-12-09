@@ -14,7 +14,7 @@ class Application:
     def start(self):
         while self.running:
             socketio.emit('update', {
-                'speed': 0.0,
+                'speed': 230.0,
                 'gear': 0,
                 'rpm': 50
             })
