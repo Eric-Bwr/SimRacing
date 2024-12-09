@@ -9,9 +9,9 @@
 .progress-container {
     position: relative;
     flex-grow: 1;
-    height: 20px;
+    height: 100px;
     background-color: #4D4D4D;
-    border-radius: 10px;
+    border-radius: 2px;
     overflow: hidden;
 }
 
@@ -19,10 +19,21 @@
     height: 100%;
     width: 0;
     background-color: #4CAF50;
-    border-radius: 10px;
+    border-radius: 2px;
     transition: width 0.5s ease;
 }
 
 .rpm-bar {
     background-color: #FFB300;
+}
+
+.needle {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 2px;
+    height: 100px;
+    background-color: red;
+    transform-origin: bottom center;
+    transition: transform 0.5s ease;
 }

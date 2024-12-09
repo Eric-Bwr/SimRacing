@@ -5,5 +5,14 @@ socket.on('update', function (data) {
 
     document.getElementById('speed').innerText = speed;
     document.getElementById('gear').innerText = gear;
-    document.getElementById('rpm').style.width = `${rpm}%`;
+
+    const progressBar = document.querySelector('.progress-bar');
+    const needle = document.querySelector('.needle');
+
+    const clampedPercentage = Math.min(Math.max(rpm, 0), 100);
+
+    progressBar.style.width = clampedPercentage + '%';
+    const containerWidth = document.querySelector('.progress-container').offsetWidth;
+    const needlePosition = (clampedPercentage / 100) * containerWidth;
+    needle.style.left = `${needlePosition}px`;
 });
