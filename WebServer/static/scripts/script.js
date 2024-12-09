@@ -5,5 +5,5 @@ socket.on('update', function (data) {
 
     document.getElementById('speed').innerText = speed;
     document.getElementById('gear').innerText = gear;
-    document.getElementById('rpm').innerText = rpm;
+    document.getElementById('rpm').style.width = `${rpm}%`;
 });

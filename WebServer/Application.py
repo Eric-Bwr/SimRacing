@@ -16,7 +16,7 @@ class Application:
             socketio.emit('update', {
                 'speed': 0.0,
                 'gear': 0,
-                'rpm': 0.5
+                'rpm': 50
             })
             time.sleep(0.1)
 
