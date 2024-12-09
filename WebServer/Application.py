@@ -13,18 +13,15 @@ class Application:
 
     def start(self):
         while self.running:
-            socketio.emit('updateCoordinates', {
-                'lat': self.latitude,
-                'lon': self.longitude,
-                'alt': self.altitude,
-                'status': self.status,
-                'closestDistance': self.closestDistance
+            socketio.emit('update', {
+                'speed': 0.0,
+                'gear': 0,
+                'rpm': 0.5
             })
             time.sleep(0.1)
 
     def stop(self):
         self.running = False
-        self.sock.close()
 
 
 application = Application()
