@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GPS</title>
+    <link rel="icon" href="{{ url_for('static', filename='icons/favicon.ico') }}" type="image/x-icon">
+    <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/dep/leaflet.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/progress-bar.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/map.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style/tabs.css') }}">
+</head>
+<body>
+
+<div id="map"></div>
+<button id="follow" class="follow"><span>⊕</span></button>
+<div class="status"><span>ᯤ</span></div>
+<div class="tab-container">
+    <div class="tab-header">
+        <button class="tab-link active" onclick="openTab(event, 'info')">Info</button>
+        <button class="tab-link" onclick="openTab(event, 'field')">Feld</button>
+        <button class="tab-link" onclick="openTab(event, 'height')">Höhe</button>
+        <button class="tab-link" onclick="openTab(event, 'power')">Strom</button>
+        <button class="tab-link" onclick="openTab(event, 'gas')">Gas</button>
+        <button class="tab-link" onclick="openTab(event, 'water')">Wasser</button>
+        <button class="tab-link" onclick="openTab(event, 'waste')">Abwasser</button>
+    </div>
+
+    <div id="info" class="tab-content active">
+        <div class="progress-container-wrapper">
+            <div class="progress-container">
+                <div class="progress-bar cpu-bar" id="cpuProgress"></div>
+                <div class="progress-text">CPU</div>
+            </div>
+            <div class="progress-container">
+                <div class="progress-bar ram-bar" id="ramProgress"></div>
+                <div class="progress-text">RAM</div>
+            </div>
+        </div>
+        <div class="coordinates">
+            <p>Latitude: <span id="lat">N/A</span></p>
+            <p>Longitude: <span id="lon">N/A</span></p>
+            <p>Altitude: <span id="alt">N/A</span></p>
+        </div>
+        <div class="file-actions-container">
+            <label for="fileUpload" class="custom-upload-button">Hochladen</label>
+            <input type="file" id="fileUpload" style="display: none;">
+
+            <button id="downloadButton" class="custom-download-button">Herunterladen</button>
+        </div>
+    </div>
+
+    <div id="field" class="tab-content">
+        <div class="data">
+            <p>Distanz: <span id="closestDistance">N/A</span></p>
+        </div>
+    </div>
+</div>
+
+<script src="{{ url_for('static', filename='scripts/dep/leaflet.js') }}"></script>
+<script src="{{ url_for('static', filename='scripts/dep/socketio.js') }}"></script>
+<script src="{{ url_for('static', filename='scripts/script.js') }}"></script>
+<script src="{{ url_for('static', filename='scripts/tabs.js') }}"></script>
+<script src="{{ url_for('static', filename='scripts/upDownLoad.js') }}"></script>
+</body>
+</html>

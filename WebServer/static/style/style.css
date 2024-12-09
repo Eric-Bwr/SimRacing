@@ -1,0 +1,36 @@
+body {
+    margin: 0 !important;
+    background-color: #2B2B2B;
+}
+
+.coordinates {
+    margin-top: 20px;
+    font-size: 18px;
+    color: white;
+}
+
+.coordinates p {
+    margin: 5px 0;
+}
+
+.file-actions-container {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0;
+    width: 100%;
+    gap: 20px;
+}
+
+.custom-upload-button, .custom-download-button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.custom-upload-button:hover, .custom-download-button:hover {
+    background-color: #45a049;
+}

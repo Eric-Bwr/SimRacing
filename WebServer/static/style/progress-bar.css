@@ -1,0 +1,44 @@
+.progress-container-wrapper {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    margin: 4px 0;
+    width: 100%;
+}
+
+.progress-container {
+    position: relative;
+    flex-grow: 1;
+    height: 20px;
+    background-color: #4D4D4D;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    width: 0;
+    background-color: #4CAF50;
+    border-radius: 10px;
+    transition: width 0.5s ease;
+}
+
+.cpu-bar {
+    background-color: #FFB300;
+}
+
+.ram-bar {
+    background-color: #26A69A;
+}
+
+.progress-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+    pointer-events: none;
+}

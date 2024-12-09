@@ -1,0 +1,51 @@
+#map {
+    height: 300px;
+    width: 100%;
+    z-index: 1;
+    position: relative;
+}
+
+.leaflet-control {
+    display: none;
+    visibility: hidden;
+    margin: 0;
+    padding: 0;
+    width: 0;
+    height: 0;
+    right: 0;
+}
+
+@keyframes blink-opacity {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.3;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.blinking-marker {
+    animation: blink-opacity 1s infinite;
+}
+
+.status, .follow {
+    position: absolute;
+    z-index: 100;
+    background-color: rgba(0, 0, 0, 0.0);
+    padding: 0;
+    border: none;
+    top: -16px;
+}
+
+.status {
+    right: 0;
+    font-size: 40px;
+}
+
+.follow {
+    left: 0;
+    font-size: 50px;
+}

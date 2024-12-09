@@ -1,0 +1,22 @@
+{
+    "name": "Race",
+    "short_name": "Race",
+    "description": "Race",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#2B2B2B",
+    "theme_color": "#2B2B2B",
+    "orientation": "any",
+    "icons": [
+      {
+        "src": "icons/icon-x128.png",
+        "sizes": "128x128",
+        "type": "image/png"
+      },
+      {
+        "src": "icons/icon-x512.png",
+        "sizes": "512x512",
+        "type": "image/png"
+      }
+    ]
+  }
