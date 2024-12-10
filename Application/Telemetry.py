@@ -52,25 +52,31 @@ def getData(data):
     return return_dict
 
 
-def updateTelemetryData(sharedData):
+def updateTelemetryData(cb):
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     sock.bind((UDP_IP, UDP_PORT))
 
     while True:
         data, addr = sock.recvfrom(1500)
         parsedData = getData(data)
-        sharedData[KEY_IS_RACE_ON] = bool(parsedData.get("IsRaceOn", 0))
-        sharedData[KEY_SPEED] = parsedData.get("Speed", 0) * 3.6
+
+        isRaceOn = bool(parsedData.get("IsRaceOn", 0))
+
+        speed = parsedData.get("Speed", 0) * 3.6
+
         gear = parsedData.get("Gear", 0)
         if gear == 11:
-            sharedData[KEY_GEAR] = "N"
+            gearString = "N"
         elif gear == 0:
-            sharedData[KEY_GEAR] = "R"
+            gearString = "R"
         else:
-            sharedData[KEY_GEAR] = str(gear)
+            gearString = str(gear)
+
         rpm = parsedData.get("CurrentEngineRpm", 0)
         rpmMax = parsedData.get("EngineMaxRpm", 0)
         if rpmMax == 0.0:
-            sharedData[KEY_ENGINE_RPM_PERC] = 0.0
+            rpmNorm = 0.0
         else:
-            sharedData[KEY_ENGINE_RPM_PERC] = rpm / rpmMax
+            rpmNorm = rpm / rpmMax
+
+        cb(isRaceOn, speed, gearString, rpmNorm)

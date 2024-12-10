@@ -1,4 +1,4 @@
 @echo off
 cd Application
-streamlit run Main.py
+python3 Application.py
 pause
