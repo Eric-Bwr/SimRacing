@@ -15,7 +15,7 @@ jumps = {
 }
 
 dataTypes = {}
-with open('Formats/FH5.txt', 'r') as f:
+with open('formats/FH5.txt', 'r') as f:
     print("Reading format data")
     lines = f.read().split('\n')
     for line in lines:
