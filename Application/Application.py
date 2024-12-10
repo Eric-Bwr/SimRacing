@@ -26,12 +26,20 @@ class Application:
 
     def start(self):
         while self.running:
-            socketio.emit('update', {
-                'speed': self.speed,
-                'gear': self.gear,
-                'rpm': self.rpm,
-                'flashing': self.rpm > RPM_FLASHING
-            })
+            if self.isRaceOn:
+                socketio.emit('update', {
+                    'speed': self.speed,
+                    'gear': self.gear,
+                    'rpm': self.rpm,
+                    'flashing': self.rpm > RPM_FLASHING
+                })
+            else:
+                socketio.emit('update', {
+                    'speed': 0,
+                    'gear': "N",
+                    'rpm': 0,
+                    'flashing': False
+                })
             time.sleep(0.1)
 
     def updateArduino(self):
