@@ -8,7 +8,7 @@ from Arduino import initArduino, setArduinoValues
 app = Flask(__name__)
 socketio = SocketIO(app)
 
-RPM_FLASHING = 92
+RPM_FLASHING = 85
 
 
 class Application:
@@ -28,7 +28,7 @@ class Application:
         while self.running:
             if self.isRaceOn:
                 socketio.emit('update', {
-                    'speed': self.speed,
+                    'speed': int(self.speed),
                     'gear': self.gear,
                     'rpm': self.rpm,
                     'flashing': self.rpm > RPM_FLASHING
@@ -40,12 +40,15 @@ class Application:
                     'rpm': 0,
                     'flashing': False
                 })
-            time.sleep(0.1)
+            time.sleep(0.01)
 
     def updateArduino(self):
         initArduino()
         while self.running:
-            setArduinoValues(self.speed, self.rpm)
+            rpm = self.rpm
+            if rpm < 25:
+                rpm = 0
+            setArduinoValues(self.speed, rpm)
             time.sleep(0.1)
 
     def updateTelemetryCb(self, isRaceOn, speed, gearString, rpmNorm):
