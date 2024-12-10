@@ -1,8 +1,5 @@
 import struct
 import socket
-import time
-
-from Util import *
 
 UDP_IP = "127.0.0.1"
 UDP_PORT = 30500
@@ -14,7 +11,7 @@ jumps = {
     'u16': 2,  # Unsigned 16bit int
     'u8': 1,  # Unsigned 8bit int
     's8': 1,  # Signed 8bit int
-    'hzn': 12  # Unknown, 12 bytes of.. something
+    'hzn': 12  # Unknown, 12 bytes of something
 }
 
 dataTypes = {}
@@ -71,9 +68,9 @@ def updateTelemetryData(sharedData):
             sharedData[KEY_GEAR] = "R"
         else:
             sharedData[KEY_GEAR] = str(gear)
-        sharedData[KEY_ENGINE_RPM] = parsedData.get("CurrentEngineRpm", 0)
-        sharedData[KEY_ENGINE_RPM_MAX] = parsedData.get("EngineMaxRpm", 0)
-        if sharedData[KEY_ENGINE_RPM_MAX] == 0.0:
+        rpm = parsedData.get("CurrentEngineRpm", 0)
+        rpmMax = parsedData.get("EngineMaxRpm", 0)
+        if rpmMax == 0.0:
             sharedData[KEY_ENGINE_RPM_PERC] = 0.0
         else:
-            sharedData[KEY_ENGINE_RPM_PERC] = (sharedData[KEY_ENGINE_RPM] / sharedData[KEY_ENGINE_RPM_MAX])
+            sharedData[KEY_ENGINE_RPM_PERC] = rpm / rpmMax

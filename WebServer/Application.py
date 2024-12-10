@@ -12,12 +12,17 @@ class Application:
         self.running = True
 
     def start(self):
+        simVal = 0
         while self.running:
             socketio.emit('update', {
-                'speed': 230.0,
+                'speed': int(simVal * 2),
                 'gear': 0,
-                'rpm': 50
+                'rpm': simVal,
+                'flashing': simVal > 90
             })
+            simVal += 0.5
+            if simVal > 100:
+                simVal = 0
             time.sleep(0.1)
 
     def stop(self):

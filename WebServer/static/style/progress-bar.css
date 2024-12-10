@@ -12,7 +12,7 @@
     position: relative;
     flex-grow: 1;
     height: 100px;
-    background-color: #4D4D4D;
+    background-image: linear-gradient(to right, rgb(17, 182, 224) 0%, rgb(17, 182, 224) 50%, rgb(0, 255, 0) 78%, rgb(255, 255, 0) 94%, rgb(255, 0, 0) 100%);
     border-radius: 2px;
     overflow: hidden;
 }
@@ -20,22 +20,15 @@
 .progress-bar {
     height: 100%;
     width: 0;
-    background-color: #4CAF50;
     border-radius: 2px;
-    transition: width 0.5s ease;
-}
-
-.rpm-bar {
-    background-color: #FFB300;
 }
 
 .needle {
     position: absolute;
     top: 0;
     left: 0;
-    width: 2px;
+    width: 4px;
     height: 100px;
-    background-color: red;
+    background-color: #2B2B2B;
     transform-origin: bottom center;
-    transition: transform 0.5s ease;
 }
