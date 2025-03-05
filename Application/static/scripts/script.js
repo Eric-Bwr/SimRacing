@@ -1,6 +1,38 @@
 const socket = io.connect('http://' + document.domain + ':' + location.port);
 
 let flashingInterval;
+let wakeLock = null;
+
+async function requestWakeLock() {
+  try {
+    wakeLock = await navigator.wakeLock.request('screen');
+    console.log('Wake Lock is active');
+  } catch (err) {
+    console.error(`${err.name}, ${err.message}`);
+  }
+}
+
+function releaseWakeLock() {
+  if (wakeLock !== null) {
+    wakeLock.release()
+      .then(() => {
+        console.log('Wake Lock has been released');
+        wakeLock = null;
+      });
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  requestWakeLock();
+});
+
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'visible') {
+    requestWakeLock();
+  } else {
+    releaseWakeLock();
+  }
+});
 
 socket.on('update', function (data) {
     const {speed, gear, rpm, flashing} = data;
